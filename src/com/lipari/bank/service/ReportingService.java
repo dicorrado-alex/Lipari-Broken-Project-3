@@ -23,12 +23,8 @@ public class ReportingService {
      * Conta le transazioni di un dato tipo su tutti i conti forniti.
      */
     public long countTransactionsByType(List<Account> accounts, TransactionType type) {
-        accounts.stream()
+        return accounts.stream()
                 .flatMap(a -> a.getTransactions().stream())
-                .peek(debugLog::add)
-                .forEach(t -> { /* terminal op */ });
-
-        return debugLog.stream()
                 .filter(t -> t.type() == type)
                 .count();
     }
