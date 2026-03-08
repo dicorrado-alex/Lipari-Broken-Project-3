@@ -41,7 +41,7 @@ public sealed class Account permits CheckingAccount, SavingsAccount {
 
     // ─── Operazioni ─────────────────────────────────────────────────────────
 
-    public void deposit(BigDecimal amount) {
+    public synchronized void deposit(BigDecimal amount) {
         if (amount == null || amount.compareTo(BigDecimal.ZERO) <= 0) {
             throw new IllegalArgumentException("Importo deposito deve essere positivo");
         }
@@ -53,7 +53,7 @@ public sealed class Account permits CheckingAccount, SavingsAccount {
     /**
      * Preleva {@code amount} dal saldo del conto.
      */
-    public void withdraw(BigDecimal amount) {
+    public synchronized void withdraw(BigDecimal amount) {
         if (amount == null || amount.compareTo(BigDecimal.ZERO) <= 0) {
             throw new IllegalArgumentException("Importo prelievo deve essere positivo");
         }
